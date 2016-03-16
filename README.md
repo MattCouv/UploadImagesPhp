@@ -7,6 +7,7 @@ It is a simple Php class to upload images, resize them and more
 3. Set Folder
 4. Validate file
 5. Resize
+
 ## How to get started
 1. Download the UploadFile.php file
 2. Next include the file in your project :
