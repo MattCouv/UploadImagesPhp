@@ -1,5 +1,6 @@
 # Upload Images Php
 It is a simple Php class to upload images, resize them and more
+
 ## Basic functionalities
 1. Upload
 2. Set Allowed Extensions
