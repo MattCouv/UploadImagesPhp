@@ -5,7 +5,7 @@ It is a simple Php class to upload images, resize them and more
 1. Upload
 2. Set Allowed Extensions
 3. Set Folder
-4. Set file name
+4. Set resized image's name
 5. Resize
 
 ## How to get started
