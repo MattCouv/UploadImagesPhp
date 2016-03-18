@@ -17,6 +17,7 @@ class UploadFile
     $this->errors = [];
   }
 
+
   public function upload($file)
   {
     $this->validate($file);
@@ -24,7 +25,7 @@ class UploadFile
     if(!empty($this->errors)){
       echo var_dump($this->errors);
       return false;
-    }else{
+    }
       print_r($file);
       $this->setFolder($file);
       print_r($this->directory);
@@ -33,22 +34,30 @@ class UploadFile
         return false;
       }
       return true;
-    }
+
   }
 
   public function setAllowedExtentions($type=[])
   {
     $this->allowedExtentions = $type;
   }
+
   private function uniqId($file)
   {
     $path_parts = pathinfo($file["name"]);
     return $this->uniqId = $path_parts['filename'];
   }
+
   public function getId()
   {
     return $this->uniqId;
   }
+
+  public function selectDirectory($path)
+  {
+    $this->directory = $path;
+  }
+
   private function setFolder($file)
   {
     $this->directory = $this->directory . $this->uniqId($file);
@@ -59,7 +68,7 @@ class UploadFile
 
   private function validate($file)
   {
-    if(empty($file['name'])){
+    if(empty($file['name']) || empty($file)){
       array_push($this->errors,"Il n'y a pas d'image");
     }
     if(!in_array($file['type'],$this->allowedExtentions)){
@@ -67,10 +76,17 @@ class UploadFile
     }
   }
 
-  public function resize($file)
+  public function resize($file,$options=[])
   {
+    if(!empty($this->errors)){
+      return false;
+    }
+      extract($options);
+      if(!isset($options['name'])) $options['name']="thumbnail.jpg";
+      var_dump($options);
+
       $image_source = "$this->directory" . '/' . $file['name'];
-      $resize_image = "$this->directory" . '/' . "thumbnail.jpg";
+      $resize_image = "$this->directory" . '/' . $options['name'];
 	    /*lister les dimensions de l'image*/
 	    list($width, $height) = getimagesize($image_source);
       // définir une nouvelle image avec les dimensions autorisés new_width et new_height
